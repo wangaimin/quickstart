@@ -1,0 +1,9 @@
+<div>car-detail</div>
+<div *ngIf="car" >
+  <h2>{{car.name}} 详情</h2>
+  <p><input type="text"   [(ngModel)]="car.name"></p>
+  <p>车型：{{car.name}}</p>
+  <p>品牌：{{car.brand}}</p>
+  <p>集团：{{car.group}}</p>
+  <button (click)="goBack()">回退</button>
+</div>

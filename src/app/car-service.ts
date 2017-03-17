@@ -11,11 +11,11 @@ import {Cars} from './mock-cars';
 export class CarService {
 
   getCars():Promise<Car[]> {
-    //setTimeout(return Cars,5000);
-    // return Cars;
     return Promise.resolve(Cars);
-
-
+  };
+  getCar(id:Number):Promise<Car>{
+    return this.getCars()
+            .then(cars=>cars.find(car=>car.id===id));
   }
 
 }

@@ -2,23 +2,33 @@
  * Created by admin on 2017/3/8.
  */
 
-import {Component,Input} from '@angular/core';
+import {Component,OnInit} from '@angular/core';
+import {ActivatedRoute,Params} from '@angular/router'
+import {Location} from '@angular/common'
 import {Car} from './Car';
+import {CarService} from './car-service'
+import 'rxjs/add/operator/switchMap'
 
 @Component({
+  moduleId:module.id,
   selector:"car-detail",
-  template:`
-            <div *ngIf="car" >
-              <h2>{{car.name}} 详情</h2>
-              <p><input type="text"   [(ngModel)]="car.name"></p>
-              <p>车型：{{car.name}}</p>
-              <p>品牌：{{car.brand}}</p>
-              <p>集团：{{car.group}}</p>
-            </div>
-           `
+ templateUrl:'./car-detail.component.html'
 })
 
-export class CarDetailComponent{
-  @Input()
-  car:Car
+export class CarDetailComponent implements OnInit{
+  car:Car;
+  constructor(
+    private carService:CarService,
+    private route:ActivatedRoute,
+    private location:Location
+  ){}
+  ngOnInit():void{
+    //id是数字，而路由参数的值总是字符串。 所以我们需要通过 JavaScript 的 (+) 操作符把路由参数的值转成数字。
+    this.route.params.switchMap((params:Params)=>this.carService.getCar(+params['id']))
+      .subscribe(car=>this.car=car);
+  }
+  goBack():void{
+    this.location.back();
+  }
+
 }
