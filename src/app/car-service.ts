@@ -11,8 +11,13 @@ import {Cars} from './mock-cars';
 export class CarService {
 
   getCars():Promise<Car[]> {
-    return Promise.resolve(Cars);
-  };
+       return Promise.resolve(Cars);
+ };
+ getCarsSlowly():Promise<Cars>{
+   return new Promise(resolve=>{
+     setTimeout(()=>resolve(this.getCars()),3000);
+   });
+ }
   getCar(id:Number):Promise<Car>{
     return this.getCars()
             .then(cars=>cars.find(car=>car.id===id));
