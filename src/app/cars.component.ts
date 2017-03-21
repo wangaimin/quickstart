@@ -2,19 +2,23 @@ import {Component} from '@angular/core';
 import {Car} from './Car';
 import {OnInit} from '@angular/core';
 import {CarService} from './car-service'
+import {Router} from '@angular/router'
 
 
 @Component({
   selector: 'my-cars',
-  template:`
+  template: `
             <ul class="cars">
                 <li *ngFor="let car of cars" (click)="clickCar(car)" [class.selected]="selectCar==car">
-                <a [routerLink]="['/detail',car.id]">
+                <!--<a [routerLink]="['/detail',car.id]">-->
                  <span class="badge">{{car.brand}}</span>{{car.name}}
-                 </a>
+                 <!--</a>-->
                 </li>
             </ul>
-
+            <div  *ngIf="selectCar">
+            <h2>{{selectCar.name|uppercase}}</h2>
+            <button (click)="gotoDetail()" >查看详情</button>
+            </div>
             <!--<car-detail [car]="selectCar"></car-detail>-->
             `,
   styles: [`
@@ -69,20 +73,31 @@ import {CarService} from './car-service'
 
 })
 
-export class CarsComponent implements OnInit{
-  ngOnInit():void{
+export class CarsComponent implements OnInit {
+  cars:Car[];
+  selectCar:Car;
+
+  ngOnInit():void {
     console.log('OnInit');
     this.getCars();
-  };
-  constructor(private carService:CarService){};
- // title="汽车列表";
-  cars:Car[];
-  getCars():void{
-    this.carService.getCars().then(cars=>this.cars=cars);
-  };
-   selectCar:Car;
-   clickCar(car:Car):void {
-    this.selectCar=car;
+  }
+
+  constructor(
+    private carService:CarService,
+    private router:Router
+   ) {}
+
+  getCars():void {
+   // this.carService.getCars().then(cars=>this.cars = cars);
+    this.carService.getCarsByAPI().then(cars=>this.cars = cars);
+    console.log('上面的then为异步执行，等待请求有结果后执行then中的代码');
+  }
+
+  clickCar(car:Car):void {
+    this.selectCar = car;
+  }
+  gotoDetail():void{
+    this.router.navigate(['detail',this.selectCar.id])
   }
 }
 
