@@ -1,0 +1,9 @@
+<div id="search-component">
+  <h4>Car Search</h4>
+  <input #searchName (keyup)="search(searchName.value)" />
+  <div>
+    <div *ngFor="let car of Cars | async" (click)="gotoDetail(car)">
+      {{car.name}}
+    </div>
+  </div>
+</div>

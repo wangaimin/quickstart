@@ -5,7 +5,7 @@
 import {Injectable} from '@angular/core';
 import {Car} from './Car';
 import {Cars} from './mock-cars';
-import {Http,Jsonp} from '@angular/http'
+import {Http, Headers} from '@angular/http'
 import 'rxjs/add/operator/toPromise'
 
 
@@ -13,7 +13,7 @@ import 'rxjs/add/operator/toPromise'
 export class CarService {
   private serviceUrl='http://localhost:52181/api';
   private header=new Headers({'Content-Type':'application/json'});
-  constructor(private http:Http,private jsonp:Jsonp){}
+  constructor(private http:Http){}
 
   getCarsByAPI():Promise<Car[]>{
     return this.http.get(this.serviceUrl+'/car/get').toPromise()
@@ -29,8 +29,10 @@ export class CarService {
    });
  }
  update(car:Car):Promise<Car>{
-   return this.http.put(serviceUrl+'/car/update',JSON.stringify(car),{headers:this.header})
-     .toPromise().then(()=>car).catch(this.handleError());
+   return this.http.post(this.serviceUrl+'/car/Update',car
+     ,{headers:this.header}
+     )
+     .toPromise().then(()=>car).catch(this.handleError);
  }
 
   getCar(id:Number):Promise<Car>{

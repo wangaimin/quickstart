@@ -31,4 +31,8 @@ export class CarDetailComponent implements OnInit{
     this.location.back();
   }
 
+  save():void{
+    this.carService.update(this.car)
+  }
+
 }

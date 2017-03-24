@@ -1,0 +1,10 @@
+<ul class="cars">
+  <li *ngFor="let car of cars" (click)="clickCar(car)" [class.selected]="selectCar==car">
+    <span class="badge">{{car.brand}}</span>{{car.name}}
+    <button class="delete" (click)="delete(car);$event.stopPropagation()">x</button>
+  </li>
+</ul>
+<div  *ngIf="selectCar">
+  <h2>{{selectCar.name|uppercase}}</h2>
+  <button (click)="gotoDetail()" >查看详情</button>
+</div>

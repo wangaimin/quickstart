@@ -10,6 +10,7 @@ import {CarDetailComponent} from './car-detail.component'
 import {TopComponent} from './top.component'
 
 import {CarService} from './car-service'
+import {CarSearchComponent} from "./car-search.component";
 
 
 
@@ -25,7 +26,8 @@ import {CarService} from './car-service'
     AppComponent,
     CarsComponent,
     CarDetailComponent,
-    TopComponent
+    TopComponent,
+    CarSearchComponent
   ],
   providers: [CarService],
   bootstrap: [AppComponent]
