@@ -11,6 +11,8 @@ import {TopComponent} from './top.component'
 
 import {CarService} from './car-service'
 import {CarSearchComponent} from "./car-search.component";
+import {CarFormComponent} from "./car-form.component";
+
 
 
 
@@ -27,7 +29,8 @@ import {CarSearchComponent} from "./car-search.component";
     CarsComponent,
     CarDetailComponent,
     TopComponent,
-    CarSearchComponent
+    CarSearchComponent,
+    CarFormComponent
   ],
   providers: [CarService],
   bootstrap: [AppComponent]

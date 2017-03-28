@@ -14,6 +14,7 @@ import {Component} from '@angular/core';
            <a routerLink="/top">top</a>
            <a routerLink="/cars">cars</a>
            <a routerLink="/search">seach</a>
+           <a routerLink="/form">form</a>
            </nav>
            <router-outlet></router-outlet>`,
 
