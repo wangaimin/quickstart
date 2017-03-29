@@ -8,6 +8,11 @@ import {Cars} from './mock-cars';
 import {Http, Headers} from '@angular/http'
 import 'rxjs/add/operator/toPromise'
 
+//@Injectable() 标识一个类可以被注入器实例化。 我们需要它，因为 Angular 需要构造函数参数的元数据来注入一个Http
+
+//注入器同时负责实例化像HerosComponent这样的组件。为什么不标记HerosComponent为@Injectable()呢？
+//我们可以添加它。但是没有必要，因为HerosComponent已经有@Component装饰器了， @Component（和随后将会学到的@Directive和@Pipe一样）是 Injectable 的子类型。
+//实际上，正是这些Injectable装饰器是把一个类标识为注入器实例化的目标。
 
 @Injectable()
 export class CarService {

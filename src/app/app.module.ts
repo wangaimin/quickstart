@@ -12,6 +12,7 @@ import {TopComponent} from './top.component'
 import {CarService} from './car-service'
 import {CarSearchComponent} from "./car-search.component";
 import {CarFormComponent} from "./car-form.component";
+import {CustomFormsModule} from "ng2-validation";
 
 
 
@@ -22,7 +23,8 @@ import {CarFormComponent} from "./car-form.component";
     FormsModule,
     HttpModule,
     JsonpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CustomFormsModule
   ],
   declarations: [
     AppComponent,

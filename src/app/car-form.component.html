@@ -1,6 +1,11 @@
-<div class="container">
+
+<!--验证方式有两种 -->
+<!--1、在html标签中添加(template driven) 类似：[rangeLength]="[1,8]-->
+<!--2、数据模型驱动验证(model driven)   url:https://github.com/yuyang041060120/ng2-validation-->
+<div class="container" >
  <h1>Car Form</h1>
-  <form #carForm="ngForm" (ngSubmit)="onSubmit()">
+  <!--关掉浏览器默认验证novalidate-->
+  <form #carForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="form-group">
       <label for="name">名称</label>
       <input type="text" class="form-control" id="name" name="name" [(ngModel)]="model.name" #name="ngModel" required >
@@ -10,7 +15,12 @@
     </div>
     <div class="form-group">
       <label for="brand">品牌</label>
-      <input type="text" class="form-control" id="brand" name="brand" [(ngModel)]="model.brand" >
+      <input type="text" class="form-control" id="brand" name="brand" [(ngModel)]="model.brand" #brand="ngModel" digits [rangeLength]="[1,8]">
+      <!--<p *ngIf="brand.errors?.rangeLength||brand.errors?.digits">请输入合法的数据</p>-->
+      <p *ngIf="brand.errors?.rangeLength">请输入1-8为长度的品牌</p>
+      <p *ngIf="brand.errors?.digits">请输入数字</p>
+
+
     </div>
     <div class="form-group">
       <label for="group">集团</label>
@@ -18,6 +28,13 @@
        <option *ngFor="let group of groups" [value]="group">{{group}}</option>
      </select>
     </div>
+
+    <div class="form-group">
+      <label for="id">ID</label>
+     <input type="number" class="form-control" id="id" name="id" [(ngModel)]="model.id" #id="ngModel" required [gt]="10">
+      <p *ngIf="id.errors?.gt">最少为10</p>
+    </div>
+
     <button type="button" class="btn btn-default" (click)="addCar();carForm.reset()">添加</button>
 
     <button type="submit" class="btn btn-success" [disabled]="!carForm.form.valid">提交</button>

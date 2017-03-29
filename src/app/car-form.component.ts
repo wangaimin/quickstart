@@ -13,10 +13,10 @@ import {Car} from './Car'
 export class CarFormComponent{
   submitted=false;
   groups=["大众集团","通用集团","上汽集团"];
-  model=new Car(1,"荣威350","荣威","上汽集团");
+  model=new Car(11,"荣威350","荣威","上汽集团");
 
   addCar(){
-    this.model=new Car(1,"","","");
+    this.model=new Car(12,"","","");
   }
   onSubmit(){
     this.submitted=true;
